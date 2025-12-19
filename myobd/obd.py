@@ -35,28 +35,19 @@ class OBD:
         resp=self.conn.send("0110")
         return parse_response("0110")
     
-    def get_oxygen1(self):
-        resp=self.conn.send("0114")
-        return parse_response("0114")
+    O2_PIDS = {
+        1: "0114", 2: "0115", 3: "0116", 4: "0117",
+        5: "0118", 6: "0119", 7: "011A", 8: "011B"
+    }
     
-    def get_oxygen2(self):
-        resp=self.conn.send("0115")
-        return parse_response("0115")
+    def get_oxygen(self, sensor_num):
+        
+        pid = self.O2_PIDS.get(sensor_num)
+        if not pid:
+            raise ValueError(f"Invalid O₂ sensor number: {sensor_num}")
+        return self._query(pid)
     
-    def get_oxygen3(self):
-        resp=self.conn.send("0116")
-        return parse_response("0116")
     
-    def get_oxygen4(self):
-        resp=self.conn.send("0117")
-        return parse_response("0117")
     
-    def get_oxygen5(self):
-        resp=self.conn.send("0118")
-        return parse_response("0118")
-    
-    def get_oxygen6(self):
-        resp=self.conn.send("0119")
-        return parse_response("0119")
 
         
