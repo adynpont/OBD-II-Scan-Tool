@@ -1,0 +1,2 @@
+cd /home/adyn/Documents/GitHub/OBD-II-Scan-Project
+python -m myobd.src.Python.obdscan
