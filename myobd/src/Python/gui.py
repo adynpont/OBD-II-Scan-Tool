@@ -1,4 +1,4 @@
-import myobd.src.Python as Python
+from myobd import OBD
 import time
 import tkinter as tk
 from tkinter import messagebox
@@ -8,7 +8,7 @@ import sys, os
 
 def check_temp() :
     try:
-        connection = Python.OBD()
+        connection = OBD()
     except Exception as e:
         output.insert(tk.END, f"{e}\n")
         return
@@ -23,7 +23,7 @@ def run_scan():
     
     output.delete("1.0", tk.END)
     try:
-        connection = Python.OBD()
+        connection = OBD()
     except Exception as e:
         output.insert(tk.END, f"{e}\n")
         return
@@ -50,7 +50,7 @@ def update_sensors():
     if not live_updating:
         return
     try:
-        connection = Python.OBD() 
+        connection = OBD() 
         rpm = connection.get_rpm() 
         speed = connection.get_speed() 
         coolant_temp = connection.get_coolant_temp() 

@@ -1,9 +1,9 @@
-from .connection import ELMConnection
-from .parser import parse_response
+from elm327 import ELM327
+from parser import parse_response
 
 class OBD:
     def __init__(self):
-        self.conn = ELMConnection()
+        self.conn = ELM327()
 
     def get_rpm(self):
         resp = self.conn.send("010C")
@@ -18,10 +18,14 @@ class OBD:
         return parse_response("0105", resp)
 
     def get_dtc(self):
-        return self.conn.send("03")
+        resp = self.conn.send("03")
+        return self._parse_dtc(resp)
 
     def clear_dtc(self):
-        return self.conn.send("04")
+        resp =  self.conn.send("04")
+        if  "44" in resp.upper():
+            return True
+        return False
     
     def fuel_system_status(self):
         resp=self.conn.send("0103")
