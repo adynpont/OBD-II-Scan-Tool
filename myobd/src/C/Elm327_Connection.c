@@ -1,10 +1,10 @@
-#include <termios.h>
-#include <fcntl.h>
 #include <unistd.h>
 #include <string.h>
 #include <stdio.h>
 #include <errno.h>
 #include <dirent.h>
+#include <termios.h>
+#include <fcntl.h>
 
 
 static int set_interface_attributes (int fd, int speed);
